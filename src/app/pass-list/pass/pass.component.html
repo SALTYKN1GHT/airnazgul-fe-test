@@ -1,0 +1,39 @@
+<div class="pass d-flex">
+  <div>
+    <img [src]="coverImgPath" alt="{{ realm }}" class="cover img-fluid rounded" />
+    <div class="text-overlay">{{ realm | uppercase }} PASS</div>
+  </div>
+  <div class="destinations-list">
+    <div *ngFor="let settlement of settlements; let i = index; last as isLast">
+      <div class="d-flex flight" *ngIf="!isLast">
+        <div class>
+          <img class="profile-pic" [src]="profileImgPath" alt="" />
+        </div>
+        <div>
+          <div>
+            <img class="arrow" src="../assets/images/pass_cards/arrow.png" alt="" />
+          </div>
+          <div class="destinations d-flex justify-content-between">
+            <div>
+              {{ settlement }}
+            </div>
+            <div>
+              {{ settlements[i + 1] }}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <img class="profile-pic" src="../assets/images/dest_profile_pics/aldburg.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="details">
+      <div>Visit all locations of a <br />realm for less money!</div>
+      <h4>Price: {{ price }} $</h4>
+      <button class="btn btn-primary">SHOP NOW! <fa-icon [icon]="faShoppingCart"></fa-icon></button>
+    </div>
+  </div>
+</div>

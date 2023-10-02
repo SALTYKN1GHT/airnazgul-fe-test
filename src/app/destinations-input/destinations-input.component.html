@@ -1,0 +1,66 @@
+<div [ngClass]="classnames">
+  <h5 *ngIf="!!label">{{ label }}</h5>
+  <form (ngSubmit)="onSubmit()">
+    <div class="searchbar d-flex align-items-center justify-content-center">
+      <div>
+        <div>From:</div>
+        <app-dest-list
+          class="inputField"
+          [value]="from"
+          [destList]="getRidOfMordor()"
+          [searchBarType]="'Realm, settlement...'"
+          (searchListChangeEvent)="addItem($event)"
+          (onSelect)="getDestinations($event, 0)"
+        ></app-dest-list>
+      </div>
+      <div>
+        <div>To:</div>
+        <app-dest-list
+          class="inputField"
+          [value]="to"
+          [destList]="filteredDestination"
+          [searchBarType]="'Realm, settlement...'"
+          (searchListChangeEvent)="addItem($event)"
+          (onSelect)="getDestinations($event, 1)"
+        ></app-dest-list>
+        <p id="reminder" *ngIf="noReturn">Remember: No return from Mordor!</p>
+      </div>
+      <div>
+        <div>Departure</div>
+        <app-datepicker
+          [value]="departure"
+          [disabledDates]="blacklistedDates"
+          (onSelect)="blackListDate($event, 0)"
+        ></app-datepicker>
+      </div>
+      <div>
+        <div class="input">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [disabled]="noReturn"
+            (change)="getCheckStatus($event)"
+            [checked]="!!return"
+          />
+          <label class="form-check-label" for="Return"> Return </label>
+        </div>
+        <app-datepicker
+          [value]="return"
+          [disabledDates]="blacklistedDates"
+          (onSelect)="blackListDate($event, 1)"
+          [disabled]="!return && returnChecked"
+        ></app-datepicker>
+      </div>
+      <div *ngIf="seatsVisible" class="seats">
+        <div>Seats:</div>
+        <input class="inputField" type="number" min="1" value="1" />
+      </div>
+      <div *ngIf="!seatsVisible">
+        <button class="btn btn-outline-success" type="submit" [disabled]="!checkValues()">Search</button>
+      </div>
+      <div *ngIf="seatsVisible">
+        <button class="btn btn-outline-success" type="submit" [disabled]="!checkValues()">Filter</button>
+      </div>
+    </div>
+  </form>
+</div>

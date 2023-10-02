@@ -1,0 +1,63 @@
+.lines {
+  display: flex;
+  flex-direction: row;
+}
+#reminder {
+  color: red;
+  font-size: small;
+  text-align: center;
+}
+.card {
+  min-height: 140px;
+  background-color: rgba($color: #ffffff, $alpha: 0.8);
+}
+.searchbar {
+  gap: 2rem;
+}
+.searchbar > div {
+  min-height: 100px;
+}
+.searchbar > div:last-child {
+  min-height: 50px;
+}
+.searchbar > div > div {
+  padding-left: 20px;
+}
+
+button,
+button:disabled {
+  background-color: #2d4946;
+  border: none;
+  border-radius: 10px;
+  box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.4);
+
+  color: white;
+}
+button {
+  &:hover {
+    background-color: #2d4946;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+.form-check-input {
+  box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.4);
+}
+.input {
+  padding-left: 40px;
+}
+.inputField {
+  border-radius: 10px;
+  height: 36px;
+  width: 100%;
+  text-align: center;
+  box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  &:focus {
+    border: 1px solid #2e7b4e;
+    border-image-slice: 1; /* Szegély kép szeletelése */
+  }
+}

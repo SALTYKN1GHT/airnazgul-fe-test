@@ -1,0 +1,69 @@
+<div class="container">
+  <nav class="navbar navbar-expand-xl navbar-light bg-transparent">
+    <div class="logo">
+      <div class="title">
+        <h1>Airnazgul</h1>
+        <h2>explore middle earth with us</h2>
+      </div>
+      <img class="rounded" src="../../assets/images/nazgul_logov1.png" alt="Logo" />
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-right">
+      <div class="collapse navbar-collapse d-flex flex-row">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href=""
+              class="nav-link"
+              (click)="openModal()"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+              *ngIf="!loggedIn"
+              >Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="" *ngIf="loggedIn" (click)="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/pass-list">Tours</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact">Contact</a>
+          </li>
+          <li class="cart-icon">
+            <a routerLink="/cart">
+              <fa-icon [icon]="faShoppingCart"></fa-icon>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="navbar justify-content-end p-0" *ngIf="validateAccessToken()">
+        <div>you are logged in as:&nbsp;</div>
+        <a class="login" routerLink="/userprofile">{{ userName }}</a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<app-login
+  [loginVisible]="loginVisible"
+  (modalStateChange)="receiveModalState($event)"
+  (userLoginEvent)="receiveUserLoginEvent($event)"
+></app-login>

@@ -1,0 +1,259 @@
+<!-- Modal Background -->
+<div class="overlay" *ngIf="loginVisible"></div>
+<!-- Login Modal -->
+<div
+  class="modal fade"
+  id="loginModal"
+  data-mdb-backdrop="false"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+        <div class="modal-header">
+          <div class="close justify-content-end">
+            <button
+              #CloseButton
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              (click)="closeModal()"
+            ></button>
+          </div>
+          <div class="modal-header p-0">
+            <h2 class="modal-title" id="loginModalLabel">Welcome</h2>
+          </div>
+        </div>
+        <div class="modal-body">
+          <h5>Login</h5>
+
+          <input
+            type="email"
+            class="def-input m-0 mb-4"
+            [ngClass]="{
+              'green-border': passValidateStatus && !defEmailInputClass,
+              'red-border': !passValidateStatus && !defEmailInputClass
+            }"
+            id="loginemail"
+            name="email"
+            placeholder="Email:"
+            required
+            [(ngModel)]="formData.email"
+          />
+          <div class="input-container">
+            <div class="pass-field d-flex flex-row-reverse">
+              <input
+                class="def-input m-0 mb-0 pb-2"
+                [ngClass]="{
+                  'green-border': passValidateStatus && !defPassInputClass,
+                  'red-border': !passValidateStatus && !defPassInputClass
+                }"
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="Password:"
+                required
+                [(ngModel)]="formData.password"
+              />
+              <span (click)="togglePassword($event)" class="toggle-password">
+                <fa-icon [icon]="showPassword ? faEyeSlash : faEye"></fa-icon>
+              </span>
+            </div>
+            <div>
+              <p class="m-0 p-0 red-text" *ngIf="passValidateMsgVisible">
+                {{ passValidateMsg }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer flex-column align-items-end border-0">
+          <div>
+            <button type="submit" class="btn btn-primary" id="login">Login</button>
+          </div>
+          <div>
+            <p>
+              Dont have account yet? Register
+              <a data-bs-target="#registerModal" data-bs-toggle="modal">here!</a>
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Sign Up Modal -->
+<div
+  class="modal fade"
+  id="registerModal"
+  data-mdb-backdrop="false"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  aria-hidden="true"
+  aria-labelledby="exampleModalToggleLabel2"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="close justify-content-end">
+          <button
+            #CloseButton
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="closeModal()"
+          ></button>
+        </div>
+        <div class="modal-header p-0">
+          <h2 class="modal-title" id="loginModalLabel">Sign Up</h2>
+        </div>
+      </div>
+      <form *ngIf="!isRegisteredSuccessful" (ngSubmit)="onRegister(registerForm)" #registerForm="ngForm">
+        <div class="modal-body">
+          <div class="input-container">
+            <input
+              class="def-input m-0 mb-1"
+              [ngClass]="{
+                'green-border': userValidateStatus && !defUserInputClass,
+                'red-border': !userValidateStatus && !defUserInputClass
+              }"
+              id="username"
+              name="username"
+              placeholder="Username:"
+              autocomplete="off"
+              (keyup)="onSearch($event)"
+              [(ngModel)]="registerData.userName"
+            />
+            <p
+              class="m-0 p-0"
+              *ngIf="userValidateMsgVisible"
+              [ngClass]="{
+                'green-text': userValidateStatus,
+                'red-text': !userValidateStatus
+              }"
+            >
+              {{ userValidateMsg }}
+            </p>
+          </div>
+          <div class="input-container">
+            <input
+              class="def-input m-0 mb-1"
+              [ngClass]="{
+                'green-border': emailValidateStatus && !defEmailInputClass,
+                'red-border': !emailValidateStatus && !defEmailInputClass
+              }"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email:"
+              autocomplete="off"
+              (keyup)="onSearch($event)"
+              [(ngModel)]="registerData.email"
+            />
+            <p
+              class="m-0 p-0"
+              *ngIf="emailValidateMsgVisible"
+              [ngClass]="{
+                'green-text': emailValidateStatus,
+                'red-text': !emailValidateStatus
+              }"
+            >
+              {{ emailValidateMsg }}
+            </p>
+          </div>
+          <div class="input-container">
+            <div class="pass-field d-flex flex-row-reverse">
+              <input
+                class="def-input m-0 mb-1"
+                [ngClass]="{
+                  'green-border': passValidateStatus && !defPassInputClass,
+                  'red-border': !passValidateStatus && !defPassInputClass
+                }"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password:"
+                autocomplete="off"
+                (keyup)="onSearch($event)"
+                [(ngModel)]="registerData.password"
+              />
+            </div>
+            <div class="pass-valid-container mt-1" *ngIf="passValidateMsgVisible">
+              <p class="m-0 p-0">Password must contain:</p>
+              <ul>
+                <li
+                  [ngClass]="{
+                    'green-text': !passToShort,
+                    'red-text': passToShort
+                  }"
+                >
+                  Minimum 8 characters
+                </li>
+                <li
+                  [ngClass]="{
+                    'green-text': !passToLong,
+                    'red-text': passToLong
+                  }"
+                >
+                  Maximum 32 characters
+                </li>
+                <li
+                  [ngClass]="{
+                    'green-text': passLCase,
+                    'red-text': !passLCase
+                  }"
+                >
+                  At least one lowercase letter
+                </li>
+                <li
+                  [ngClass]="{
+                    'green-text': passUCase,
+                    'red-text': !passUCase
+                  }"
+                >
+                  At least one uppercase letter
+                </li>
+                <li
+                  [ngClass]="{
+                    'green-text': passNumChr,
+                    'red-text': !passNumChr
+                  }"
+                >
+                  At least one number
+                </li>
+                <li
+                  [ngClass]="{
+                    'green-text': passSpecChr,
+                    'red-text': !passSpecChr
+                  }"
+                >
+                  At least one of the following: <br />
+                  &#33; &#8220; &#35; &#36; &#37; &#38; &#39; &#40; &#41; &#42; &#43; &#44; &#45; &#46; &#47; &#58;
+                  &#59; &#61; &#62; &#63; &#64; &#91; &#92; &#93; &#94; &#95; &#96; &#123; &#124; &#125;
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer flex-column align-items-end border-0">
+          <div>
+            <button type="submit" class="btn btn-primary" id="register">Register</button>
+          </div>
+          <div>
+            <p>
+              back to
+              <a data-bs-target="#loginModal" data-bs-toggle="modal"> login</a>
+            </p>
+          </div>
+        </div>
+      </form>
+      <p *ngIf="isRegisteredSuccessful" style="color: green">The registration was successful</p>
+    </div>
+  </div>
+</div>

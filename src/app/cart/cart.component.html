@@ -1,0 +1,94 @@
+<div class="container">
+  <!-- tickets -->
+  <div class="cart">
+    <h5>YOUR ORDERS</h5>
+
+    <div class="ticket justify-content-between d-flex" *ngFor="let orderDetail of orderDetails">
+      <div class="departure d-flex">
+        <div class="col-md-auto icon">
+          <img
+            [src]="orderDetail.imagePathDeparture"
+            alt="{{ orderDetail.departure.settlement }}"
+            class="img-fluid rounded"
+          />
+        </div>
+        <div class="col-md-auto details">
+          <span>Depart at</span>
+          <div class="time">{{ orderDetail.departureTime }}</div>
+          <div class="date">{{ orderDetail.date }}</div>
+          <div class="location">
+            {{ orderDetail.departure.dest_code }} - {{ orderDetail.departure.settlement }},
+            {{ orderDetail.departure.realm }}
+          </div>
+        </div>
+      </div>
+      <div class="arrival d-flex">
+        <div class="col-md-auto text-end details">
+          <span>Arrive at</span>
+          <div class="time">{{ orderDetail.arrivalTime }}</div>
+          <div class="date">{{ orderDetail.date }}</div>
+          <div class="location">
+            {{ orderDetail.arrival.dest_code }} - {{ orderDetail.arrival.settlement }},
+            {{ orderDetail.arrival.realm }}
+          </div>
+        </div>
+        <div class="col-md-auto icon">
+          <img
+            [src]="orderDetail.imagePathArrival"
+            alt="{{ orderDetail.arrival.settlement }}"
+            class="img-fluid rounded"
+          />
+        </div>
+      </div>
+      <div class="buy justify-content-between">
+        <div class="price">{{ orderDetail.price }} $</div>
+        <div class="d-flex justify-content-between">
+          <button class="amount" (click)="increaseQuantity(orderDetail)">+</button>
+          <div class="itemNo">{{ orderDetail.seats }}</div>
+          <button class="amount" (click)="decreaseQuantity(orderDetail)">-</button>
+        </div>
+        <div class="">
+          <button class="delete" (click)="deleteOrder(orderDetail)">Delete Order</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-end align-items-center mt-4">
+      <h5>Total Price: {{ this.totalPrice }} $</h5>
+      <button class="submit" (click)="submitOrder()">Place Order</button>
+    </div>
+  </div>
+
+  <!-- passes -->
+  <!--  <h1>Your Passes</h1>
+  <div class="container-fluid pass" *ngFor="let passDetail of passDetails">
+    <div class="row justify-content-around">
+      <div class="col-md-auto">
+        <h3>{{ passDetail.realm | uppercase }}</h3>
+        <ul>
+          <li *ngFor="let settlement of passDetail.settlements">{{ settlement }}</li>
+        </ul>
+      </div>
+      <div class="col-md-auto">
+        <img [src]="passDetail.imagePath" alt="{{ passDetail.realm }}" class="img-fluid rounded" />
+      </div>
+      <div class="col-md-auto price">
+        <div class="col-md-auto price">
+          {{ passDetail.price }} $
+          <div class="itemNo">persons (tax included)</div>
+        </div>
+      </div>
+    </div>
+    <div class="buy row justify-content-between">
+      <div class="amount row">
+        <a href="#" class="btn btn-primary increase col" (click)="increaseQuantity(passDetail)">+</a>
+        <p class="pieces col">piece(s)</p>
+        <a href="#" class="btn btn-primary decrease col" (click)="decreaseQuantity(passDetail)">-</a>
+      </div>
+      <div class="delete row">
+        <a href="#" class="btn btn-primary delete-btn" (click)="deleteOrder(passDetail)">Delete Order</a>
+      </div>
+    </div>
+  </div>
+  -->
+</div>

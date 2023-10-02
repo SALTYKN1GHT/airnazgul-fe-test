@@ -1,0 +1,30 @@
+<button
+  [ngClass]="{ 'button-white': viewSwitch === 'user', 'button-green': viewSwitch === 'admin' }"
+  type="submit"
+  (click)="switchButton()"
+>
+  YOUR PROFILE
+</button>
+
+<button
+  [ngClass]="{ 'button-white': viewSwitch === 'admin', 'button-green': viewSwitch === 'user' }"
+  type="submit"
+  (click)="switchButton()"
+>
+  ADMIN AREA
+</button>
+<div *ngIf="viewSwitch === 'user'">
+  <app-personal-info></app-personal-info>
+  <app-billing-info></app-billing-info>
+  <div class="card">
+    <p>Purchase history</p>
+  </div>
+</div>
+<div *ngIf="viewSwitch === 'admin'">
+  <div class="card ticket-list-filter">
+    <p>Ticket list filter</p>
+  </div>
+  <div class="card ticket-list">
+    <p>List of all tickets</p>
+  </div>
+</div>

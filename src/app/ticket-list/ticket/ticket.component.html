@@ -1,0 +1,51 @@
+<div class="ticket d-flex mb-3">
+  <!-- Departure -->
+  <div class="d-flex">
+    <div class="departure-img">
+      <img [src]="imagePathDeparture" alt="{{ inputTicket?.from?.settlement }}" class="img-fluid rounded" />
+    </div>
+    <div class="departure-details">
+      <div>Depart at</div>
+      <div class="time">{{ inputTicket?.departureHour }}</div>
+      <div class="location">
+        {{ inputTicket?.from?.dest_code }} - {{ inputTicket?.from?.settlement }},
+        {{ inputTicket?.from?.realm }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrival -->
+  <div class="d-flex">
+    <div class="arrival-details">
+      <div>Arrive at</div>
+      <div class="time">{{ inputTicket?.arrivalHour }}</div>
+      <div class="location">
+        {{ inputTicket?.to?.dest_code }} - {{ inputTicket?.to?.settlement }},
+        {{ inputTicket?.to?.realm }}
+      </div>
+    </div>
+    <div class="arrival-img">
+      <img [src]="imagePathArrival" alt="{{ inputTicket?.to?.settlement }}" class="img-fluid rounded" />
+    </div>
+  </div>
+
+  <div class="misc">
+    <div class="d-flex arrival-date">
+      <div>Arrival date:</div>
+      <div class="date">{{ inputTicket?.departureDate | date : 'MMM d, y' }}</div>
+    </div>
+    <div class="d-flex price block">
+      <div class="col price">
+        <div>{{ inputTicket?.price }}$</div>
+        <div class="itemNo">2 persons (tax included)</div>
+      </div>
+      <button class="btn btn-outline-success" type="submit" (click)="addToCart()">
+        <img src="../assets/images/shopping-cart.png" alt="cart" />
+      </button>
+    </div>
+    <div class="d-flex distance-time">
+      <div>dist {{ inputTicket?.distance }} km</div>
+      <div>time {{ inputTicket?.flightTime }}</div>
+    </div>
+  </div>
+</div>

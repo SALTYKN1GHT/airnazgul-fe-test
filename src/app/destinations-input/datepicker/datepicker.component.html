@@ -1,0 +1,37 @@
+<div #calendarContainer>
+  <input
+    [disabled]="disabled"
+    ngClass="datepicker-input"
+    class="form-control"
+    placeholder="Pick a date"
+    type="text"
+    [value]="actualDate || value | date : 'yyyy-MM-dd'"
+    autocomplete="off"
+    (click)="onInputFieldClick()"
+  />
+  <div class="rounded" *ngIf="calendarVisible">
+    <div class="calendar-header" (click)="onSwitchMonth($event)" *ngIf="dayVisible">{{ month }}</div>
+    <div class="calendar-header" (click)="onSwitchYear($event)" *ngIf="monthVisible || yearVisible">{{ year }}</div>
+    <div class="calendar month" *ngIf="monthVisible">
+      <div *ngFor="let item of monthList; let i = index" (click)="onMonthClick($event, item, i)">
+        {{ item }}
+      </div>
+    </div>
+    <div class="calendar year" *ngIf="yearVisible">
+      <div *ngFor="let item of yearList" (click)="onYearClick($event, item)">
+        {{ item }}
+      </div>
+    </div>
+    <div class="calendar day" *ngIf="dayVisible">
+      <div *ngFor="let day of calendar.previous" class="disabled">
+        {{ day }}
+      </div>
+      <div *ngFor="let day of getDays()" [ngClass]="{ disabled: day.disabled }" (click)="onDayClick(day)">
+        {{ day.value }}
+      </div>
+      <div *ngFor="let day of calendar.next" class="disabled">
+        {{ day }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+.datepicker-input {
+  border-radius: 10px;
+  width: 150px;
+  text-align: center;
+  box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  &:focus {
+    border: 1px solid #2e7b4e;
+    border-image-slice: 1; /* Szegély kép szeletelése */
+  }
+}
+.content {
+  align-items: center;
+  position: relative;
+}
+.rounded {
+  position: absolute;
+  width: max-content;
+  z-index: 99;
+  cursor: pointer;
+}
+.disabled {
+  color: rgb(200, 200, 200);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.calendar {
+  align-self: center;
+  background-color: white;
+  display: grid;
+  grid-gap: 15px;
+  place-items: center;
+  padding: 10px;
+
+  max-height: 400px;
+  overflow-y: auto;
+}
+.calendar.day {
+  grid-template-columns: repeat(7, 1fr);
+}
+.calendar.year,
+.calendar.month {
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 1.5rem;
+}
+
+.calendar-header {
+  grid-column: 1 / -1; /* Fejléc kiterjesztése az összes oszlopra */
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f0f0f0;
+  width: 100%;
+}

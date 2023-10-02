@@ -1,0 +1,29 @@
+.selected {
+  background-color: #757575;
+}
+.list-group-item {
+  &:hover {
+    background-color: #757575;
+  }
+}
+.floating {
+  position: absolute;
+  z-index: 99;
+  max-height: 400px;
+  overflow-y: auto;
+  cursor: pointer;
+}
+.destinations {
+  border-radius: 10px;
+  height: 36px;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  &:focus {
+    border: 1px solid #2e7b4e;
+    border-image-slice: 1; /* Szegély kép szeletelése */
+  }
+}

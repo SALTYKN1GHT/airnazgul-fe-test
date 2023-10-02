@@ -1,0 +1,16 @@
+.ticket-list {
+  background-color: whitesmoke;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 7px;
+  border: none;
+  justify-content: center;
+}
+::ng-deep .ticket-list .searchbar {
+  gap: 1rem !important;
+  margin-bottom: -25px;
+}
+
+h2 {
+  color: black;
+}

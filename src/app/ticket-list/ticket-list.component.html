@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="ticket-list">
+    <app-destinations-input
+      [from]="depTicketOne?.from?.realm + ', ' + depTicketOne?.from?.settlement"
+      [to]="depTicketOne?.to?.realm + ', ' + depTicketOne?.to?.settlement"
+      [departure]="depTicketOne?.departureDate || ''"
+      [return]="depTicketOne?.returnDate || ''"
+      [seatsVisible]="seats"
+      classnames=""
+    ></app-destinations-input>
+    <div class="filter"></div>
+    <div class="tickets">
+      <div class="departures">
+        <h5>Departures</h5>
+        <app-ticket *ngFor="let ticket of departures" [inputTicket]="ticket"></app-ticket>
+      </div>
+      <div class="returns">
+        <h5>Returns</h5>
+        <app-ticket *ngFor="let ticket of returns" [inputTicket]="ticket"></app-ticket>
+      </div>
+    </div>
+    <div class="passes">
+      <h3>PASS OFFERSS <span>- BEST PRICE per FLIGHT</span></h3>
+    </div>
+    <app-pass [realm]="realm" [settlements]="filteredDestinations"></app-pass>
+  </div>
+</div>

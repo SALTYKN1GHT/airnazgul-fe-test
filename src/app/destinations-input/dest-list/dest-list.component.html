@@ -1,0 +1,18 @@
+<input
+  class="form-control"
+  ngClass="destinations"
+  type="text"
+  [value]="value"
+  [placeholder]="searchBarType"
+  autocomplete="off"
+  (keyup)="onSearch($event)"
+  #searchBar
+/>
+<ul class="list-group floating" id="myList" *ngIf="listVisible">
+  <li class="list-group-item" *ngFor="let item of result; let i = index" [ngClass]="{ selected: i === listIndex }">
+    <div class="" (click)="onClick($event, i)">
+      <span>{{ item.realm }}, </span>
+      <span>{{ item.settlement }}</span>
+    </div>
+  </li>
+</ul>
